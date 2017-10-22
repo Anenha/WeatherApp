@@ -1,0 +1,31 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:capitalize="words"
+        android:defaultValue="@string/pref_default_display_city"
+        android:inputType="textCapWords"
+        android:key="@string/pref_city_key"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/pref_title_display_city" />
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pref_list_time"
+        android:entryValues="@array/pref_list_time_values"
+        android:key="@string/pref_time_key"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_time" />
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/pref_list_temperature"
+        android:entryValues="@array/pref_list_temperature_values"
+        android:key="@string/pref_temperature_key"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/temperature" />
+
+</PreferenceScreen>

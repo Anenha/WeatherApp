@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">Previsão</string>
+    <string name="app_loading">Carregando...</string>
+    <string name="action_more">Mais informações</string>
+    <string name="action_settings">Configurações</string>
+    <string name="forecast">Previsão dos próximos dias</string>
+    <string name="temperature">Temperatura</string>
+    <string name="condition">Condição</string>
+    <string name="location">Local</string>
+    <string name="action_search">Procurar</string>
+    <string name="humidity">%1$s %%</string>
+    <string name="pressure">%1$s  hPa</string>
+    <string name="app_ok">OK</string>
+    <string name="app_cancel">Cancelar</string>
+    <string name="leave_app_dialog_title">Você será redirecionado</string>
+    <string name="leave_app_dialog_message">Você irá para o website Yahoo! Tempo para mais informações sobre o clima desta cidade.</string>
+    <string name="yahoo_weather_url">https://br.noticias.yahoo.com/tempo/country/state/city-</string><string name="add_city_hint">Cidade</string>
+    <string name="add_city_dialog_title">Adicionar cidade</string>
+    <string name="add_city_dialog_message">Digite o nome da cidade para adicioná-la aos favoritos.</string>
+    <string name="add_city_dialog_positive_button">Adicionar</string>
+    <string name="add_city_dialog_negative_button">Cancelar</string>
+    <string name="added_favorite_cty_snack">Cidade adicionada: %s</string>
+    <string name="favorite_empty_msg">Você ainda não tem cidades favoritas.\nToque no "+" para adicionar cidades.</string>
+
+    <string-array name="weekdays">
+        <item>Domingo</item>
+        <item>Segunda</item>
+        <item>Terça</item>
+        <item>Quarta</item>
+        <item>Quinta</item>
+        <item>Sexta</item>
+        <item>Sábado</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>Janeiro</item>
+        <item>Fevereiro</item>
+        <item>Março</item>
+        <item>Abril</item>
+        <item>Maio</item>
+        <item>Junho</item>
+        <item>Julho</item>
+        <item>Agosto</item>
+        <item>Setembro</item>
+        <item>Outubro</item>
+        <item>Novembro</item>
+        <item>Dezembro</item>
+    </string-array>
+
+    <string-array name="condition_descriptions">
+        <item>Tornado</item>
+        <item>Tempestade tropical</item>
+        <item>Furacão</item>
+        <item>Trovoadas severas</item>
+        <item>Trovoadas</item>
+        <item>Chuva e neve</item>
+        <item>Chuva e granizo</item>
+        <item>Neve e granizo</item>
+        <item>Garoa congelante</item>
+        <item>Garoa</item>
+        <item>Chuva congelante</item>
+        <item>Chuveiradas</item>
+        <item>Chuveiradas</item>
+        <item>Flocos de neve</item>
+        <item>Leve chuveiradas de neve</item>
+        <item>Sopro de neve</item>
+        <item>Neve</item>
+        <item>Granizo</item>
+        <item>Granizo</item>
+        <item>Poeira</item>
+        <item>Nebuloso</item>
+        <item>Neblina</item>
+        <item>Enfumaçado</item>
+        <item>Brisa</item>
+        <item>Brisa</item>
+        <item>Frio</item>
+        <item>Nublado</item>
+        <item>Parcialmente nublado</item>
+        <item>Parcialmente nublado</item>
+        <item>Parcialmente nublado</item>
+        <item>Parcialmente nublado</item>
+        <item>Tempo limpo</item>
+        <item>Ensolarado</item>
+        <item>Tempo Bom</item>
+        <item>Tempo Bom</item>
+        <item>Chuva e granizo</item>
+        <item>Quente</item>
+        <item>Tempestades isoladas</item>
+        <item>Trovoadas dispersas</item>
+        <item>Trovoadas dispersas</item>
+        <item>Chuvas esparsas</item>
+        <item>Neve pesada</item>
+        <item>Chuveiradas de neve dispersas</item>
+        <item>Neve pesada</item>
+        <item>Parcialmente nublado</item>
+        <item>Tempestade</item>
+        <item>Chuveiradas de neve</item>
+        <item>Trovoadas isoladas</item>
+    </string-array>
+    <string name="condition_unavailable">Indisponível</string>
+
+    <string name="title_activity_settings">Configurações</string>
+
+    <!-- Strings related to Settings -->
+    <!-- General settings -->
+    <string name="pref_header_general">Geral</string>
+
+    <string name="pref_title_display_city">Cidade inicial</string>
+    <string name="pref_city_key">initial_city</string>
+    <string name="pref_default_display_city">Sorocaba, Brasil</string>
+
+    <string name="pref_title_temperature">Temperatura</string>
+    <string name="pref_temperature_key">temperature_list</string>
+    <string-array name="pref_list_temperature">
+        <item>Celsius</item>
+        <item>Fahrenheit</item>
+    </string-array>
+    <string-array name="pref_list_temperature_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="pref_title_time">Formato do horário</string>
+    <string name="pref_time_key">hour_list</string>
+    <string-array name="pref_list_time">
+        <item>24 horas</item>
+        <item>12 horas</item>
+    </string-array>
+    <string-array name="pref_list_time_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_favorites">Favoritos</string>
+</resources>
