@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -25,29 +25,25 @@ import java.util.List;
 
 /**
  * Created by ajnen on 22/10/2017.
+ *
  */
 
 public class Prefs {
 
-    public interface PrefsCallback {
-        void onAddCity(String city, FavoritesEntity fe);
-    }
-    public interface UpdateCallback {
-        void onUpdate(FavoritesEntity fe);
-    }
+    public interface PrefsCallback { void onAddCity(String city); }
+    public interface WeatherCallback { void onUpdate(FavoritesEntity fe); }
 
     public static void addCityDialog(final Context context, final PrefsCallback callback){
 
         final View view = LayoutInflater.from(context)
                 .inflate(R.layout.layout_dialog_input, null, false);
 
-
         new AlertDialog.Builder(context)
                 .setView(view)
                 .setPositiveButton(context.getString(R.string.add_city_dialog_positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         final String city =((EditText) view.findViewById(R.id.dialog_input)).getText().toString();
-                        saveCity(context, city, callback);
+                        addCity(context, city, callback);
 
                     }
                 })
@@ -58,67 +54,62 @@ public class Prefs {
                 .show();
     }
 
-    public static List<String> getFavorites(Context context){
+    public static void updateFavorites(final Context context, final List<String> cities){
+        final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(context.getString(R.string.pref_favorites_key), new Gson().toJson(new Favorites(cities)));
+        editor.apply();
+    }
+
+    public static void getFavoritesWeather(final Context context, final WeatherCallback callback){
+        final List<String> cities = getFavorites(context);
+        final List<Favorite> favorites = new ArrayList<>();
+        if(!cities.isEmpty()) {
+            YahooWeatherService yahooService;
+            for (int pos = 0; pos < cities.size(); pos++) {
+                final String city = cities.get(pos);
+                yahooService = new YahooWeatherService(new WeatherServiceCallback() {
+                    @Override
+                    public void serviceSuccess(Channel channel) {
+                        addFavorite(context, favorites, cities, city, channel, callback);
+                    }
+
+                    @Override
+                    public void serviceFailure(Exception exception) {
+                        addFavorite(context, favorites, cities, city, null, callback);
+                    }
+                });
+                yahooService.refreshWeather(city);
+            }
+        } else {
+            callback.onUpdate(null);
+        }
+    }
+
+    private static List<String> getFavorites(Context context){
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         final String favorites = sharedPref.getString(context.getString(R.string.pref_favorites_key), null);
         if(favorites == null){
             return new ArrayList<>();
         }
+        Log.e("CIDADES: ", favorites);
         return new Gson().fromJson(favorites, Favorites.class).getCities();
     }
 
-    public static void updateFavorites(final Context context, final List<String> cities, final UpdateCallback callback){
-        YahooWeatherService yahooService;
-        final List<Favorite> favorites = new ArrayList<>();
-        if(!cities.isEmpty()) {
-            for (int pos = 0; pos < cities.size(); pos++) {
-                final String city = cities.get(pos);
-                final int position = pos;
-                yahooService = new YahooWeatherService(new WeatherServiceCallback() {
-                    @Override
-                    public void serviceSucess(Channel channel) {
-                        addFavorite(context, favorites, position, cities, city, channel, callback);
-                    }
-
-                    @Override
-                    public void serviceFailure(Exception exception) {
-                        addFavorite(context, favorites, position, cities, city, null, callback);
-                    }
-                });
-
-                yahooService.refreshWeather(city);
-            }
-        } else {
-            final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(context.getString(R.string.pref_favorites_key), new Gson().toJson(new Favorites(cities)));
-            editor.apply();
-            callback.onUpdate(null);
-        }
-    }
-
     private static void addFavorite(final Context context, final List<Favorite> favorites,
-                                    final Integer position, final List<String> cities, final String city, final Channel channel, final UpdateCallback callback){
+                                    final List<String> cities, final String city, final Channel channel,
+                                    final WeatherCallback callback){
         favorites.add(new Favorite(city, new TodayEntity(context, channel)));
-        if(position == cities.size()-1){
-            final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-            SharedPreferences.Editor editor = sharedPref.edit();
+        if(favorites.size() == cities.size()){
             FavoritesEntity fe = new FavoritesEntity(favorites);
-            editor.putString(context.getString(R.string.pref_favorites_key), new Gson().toJson(new Favorites(cities)));
-            editor.apply();
             callback.onUpdate(fe);
         }
     }
 
-    private static void saveCity(final Context context, final String city, final PrefsCallback callback){
+    private static void addCity(final Context context, final String city, final PrefsCallback callback){
         List<String> cities = getFavorites(context);
         cities.add(city);
-        updateFavorites(context, cities, new UpdateCallback() {
-            @Override
-            public void onUpdate(FavoritesEntity fe) {
-                callback.onAddCity(city, fe);
-            }
-        });
-
+        updateFavorites(context, cities);
+        callback.onAddCity(city);
     }
 }

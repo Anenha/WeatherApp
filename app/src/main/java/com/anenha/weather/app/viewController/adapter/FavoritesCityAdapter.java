@@ -35,14 +35,12 @@ import static com.anenha.weather.R.id.parent;
 
 public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdapter.ViewHolder> {
     private Context context;
-    private List<String> cities;
     private List<String> removePositions;
     private boolean editMode;
     private FavoritesEntity fe;
 
-    public FavoritesCityAdapter(final Context context, final List<String> cities, FavoritesEntity fe, final boolean editMode) {
+    public FavoritesCityAdapter(final Context context, FavoritesEntity fe, final boolean editMode) {
         this.context = context;
-        this.cities = cities;
         this.fe = fe;
         this.editMode = editMode;
         removePositions = new ArrayList<>();
@@ -51,16 +49,6 @@ public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdap
     public void setEditMode(final boolean editMode){
         this.editMode = editMode;
         notifyDataSetChanged();
-    }
-
-    public void setCities(List<String> cities) {
-        this.cities = cities;
-        removePositions = new ArrayList<>();
-        notifyDataSetChanged();
-    }
-
-    public List<String> getCities() {
-        return cities;
     }
 
     public List<String> getRemoves() { return removePositions; }
@@ -92,15 +80,20 @@ public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdap
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.checkBox.setChecked(false);
         holder.checkBox.setVisibility(editMode ? View.VISIBLE : View.INVISIBLE);
+        final String city = fe.getCities().get(position);
 
-        holder.city.setText(cities.get(position));
+        holder.city.setText(city);
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, HomeActivity.class);
-                i.putExtra("REFRESH_CITY", cities.get(position));
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(i);
+                if(editMode) {
+                    holder.checkBox.setChecked( !holder.checkBox.isChecked() );
+                } else {
+                    Intent i = new Intent(context, HomeActivity.class);
+                    i.putExtra("REFRESH_CITY", city);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(i);
+                }
             }
         });
 
@@ -108,10 +101,9 @@ public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdap
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    removePositions.add(cities.get(position));
-                    Log.e("REMOVER",cities.get(position));
-                } else if (!removePositions.isEmpty() && removePositions.contains(cities.get(position))){
-                    removePositions.remove(cities.get(position));
+                    removePositions.add(city);
+                } else if (!removePositions.isEmpty() && removePositions.contains(city)){
+                    removePositions.remove(city);
                 }
             }
         });
@@ -126,13 +118,11 @@ public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdap
         } else {
             holder.subtitle.setVisibility(View.GONE);
         }
-
-
     }
 
     @Override
     public int getItemCount() {
-        return cities.size();
+        return fe.getCities().size();
     }
 }
 

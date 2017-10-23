@@ -50,7 +50,7 @@ public class YahooWeatherService implements Callback<YahooResponseModel> {
                 callback.serviceFailure(new LocationWeatherException("No weather information found for "+local));
                 return;
             }
-            callback.serviceSucess(yahooResponseModel.getQuery().getResults().getChannel());
+            callback.serviceSuccess(yahooResponseModel.getQuery().getResults().getChannel());
 
         } else {
             callback.serviceFailure( new Exception() );

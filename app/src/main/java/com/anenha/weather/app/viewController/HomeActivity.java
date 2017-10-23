@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -24,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.anenha.weather.R;
-import com.anenha.weather.app.entity.FavoritesEntity;
 import com.anenha.weather.app.entity.TodayEntity;
 import com.anenha.weather.app.model.Channel;
 import com.anenha.weather.app.model.Forecast;
@@ -32,9 +30,6 @@ import com.anenha.weather.app.provider.WeatherServiceCallback;
 import com.anenha.weather.app.provider.YahooWeatherService;
 import com.anenha.weather.app.utils.Prefs;
 import com.anenha.weather.app.viewController.adapter.HomeForecastAdapter;
-
-//import com.memetix.mst.language.Language;
-//import com.memetix.mst.translate.Translate;
 import java.util.List;
 
 import butterknife.BindView;
@@ -60,15 +55,31 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
 
     private Channel channel;
     private YahooWeatherService yahooService;
-    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        ButterKnife.bind(this, this.findViewById(android.R.id.content));
+
+        setActionBar();
+
+        yahooService = new YahooWeatherService(this);
+
+        final String city;
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("REFRESH_CITY")){
+            city = getIntent().getExtras().getString("REFRESH_CITY");
+        } else {
+            city = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                    .getString(getString(R.string.pref_city_key), getString(R.string.pref_default_display_city));
+        }
+
+        refreshWeather(city);
+    }
+
+    private void setActionBar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ButterKnife.bind(this, this.findViewById(android.R.id.content));
 
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); //habilita a pesquisa assim que o usuario digitar no search dialog
         handleIntent(getIntent());
@@ -79,19 +90,6 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
             String query = intent.getStringExtra(SearchManager.QUERY);
             refreshWeather(query);
         }
-
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        yahooService = new YahooWeatherService(this);
-
-        final String city;
-        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("REFRESH_CITY")){
-            city = getIntent().getExtras().getString("REFRESH_CITY");
-        } else {
-            city = sharedPref.getString(getString(R.string.pref_city_key), getString(R.string.pref_default_display_city));
-        }
-
-        refreshWeather(city);
     }
 
     @Override
@@ -163,7 +161,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     @Override
-    public void serviceSucess(Channel channel) {
+    public void serviceSuccess(Channel channel) {
         this.channel = channel;
         loading.setVisibility(View.GONE);
 
@@ -189,23 +187,6 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
         forecastRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         final HomeForecastAdapter adapter = new HomeForecastAdapter(getApplicationContext(), forecast);
         forecastRecycler.setAdapter(adapter);
-
-        forecastRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-//                leftRecyclerArrow.setVisibility(
-//                        recyclerView.getChildAdapterPosition(forecastRecycler.getChildAt(0)) == 0 ?
-//                                View.INVISIBLE : View.VISIBLE
-//                );
-
-//                rightRecyclerArrow.setVisibility(
-//                        recyclerView.getChildAdapterPosition(forecastRecycler.getChildAt(0)) == 0 ?
-//                                View.INVISIBLE : View.VISIBLE
-//                );
-
-            }
-        });
     }
 
     @Override
@@ -218,6 +199,16 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
     private void refreshWeather(String local){
         loading.setVisibility(View.VISIBLE);
         yahooService.refreshWeather(local);
+    }
+
+    private void showAddCityDialog(){
+        Prefs.addCityDialog(this, new Prefs.PrefsCallback() {
+            @Override
+            public void onAddCity(String city) {
+                Snackbar.make(getCurrentFocus(),getString(R.string.added_favorite_cty_snack, city), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     private void openFavorites(){
@@ -255,16 +246,6 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
             String query = intent.getStringExtra(SearchManager.QUERY);
             refreshWeather(query);
         }
-    }
-
-    private void showAddCityDialog(){
-        Prefs.addCityDialog(this, new Prefs.PrefsCallback() {
-            @Override
-            public void onAddCity(String city, FavoritesEntity fe) {
-                Snackbar.make(getCurrentFocus(),getString(R.string.added_favorite_cty_snack, city), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }

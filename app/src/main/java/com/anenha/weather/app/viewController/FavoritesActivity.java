@@ -15,6 +15,7 @@ import com.anenha.weather.app.entity.FavoritesEntity;
 import com.anenha.weather.app.utils.Prefs;
 import com.anenha.weather.app.viewController.adapter.FavoritesCityAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,7 +27,7 @@ public class FavoritesActivity extends AppCompatActivity {
     @BindView(R.id.favorite_empty_state) TextView emptyState;
     private FavoritesCityAdapter adapter;
     private boolean editMode = false;
-    private List<String> cities;
+    private FavoritesEntity fe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +38,33 @@ public class FavoritesActivity extends AppCompatActivity {
         setSupportActionBar( (Toolbar) findViewById(R.id.toolbar) );
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        emptyState.setText(getString(R.string.app_loading));
+        getWeather();
+    }
 
-        Prefs.updateFavorites(getApplicationContext(), Prefs.getFavorites(getApplicationContext()), new Prefs.UpdateCallback() {
+    private void getWeather(){
+        isLoading(true);
+        Prefs.getFavoritesWeather(getApplicationContext(), new Prefs.WeatherCallback() {
             @Override
             public void onUpdate(FavoritesEntity fe) {
                 reloadView(fe);
             }
         });
+    }
 
+    private void isLoading(final boolean isLoading){
+        if(isLoading){
+            emptyState.setVisibility(View.VISIBLE);
+            emptyState.setText(getString(R.string.app_loading));
+            favoritesRcycler.setVisibility(View.GONE);
+        } else {
+            emptyState.setVisibility(View.GONE);
+            favoritesRcycler.setVisibility(View.VISIBLE);
+        }
     }
 
     private void reloadView(FavoritesEntity fe){
-        cities = Prefs.getFavorites(getApplicationContext());
-        if(cities.isEmpty()) {
+        this.fe = fe;
+        if(fe == null) {
             emptyState.setVisibility(View.VISIBLE);
             emptyState.setText(R.string.favorite_empty_msg);
             emptyState.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +74,9 @@ public class FavoritesActivity extends AppCompatActivity {
             favoritesRcycler.setVisibility(View.GONE);
         }
         else {
-            emptyState.setVisibility(View.GONE);
-            favoritesRcycler.setVisibility(View.VISIBLE);
+            isLoading(false);
             favoritesRcycler.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new FavoritesCityAdapter(this, cities, fe, editMode);
+            adapter = new FavoritesCityAdapter(this, fe, editMode);
             favoritesRcycler.setAdapter(adapter);
         }
     }
@@ -88,8 +101,8 @@ public class FavoritesActivity extends AppCompatActivity {
     private void addCity(){
         Prefs.addCityDialog(this, new Prefs.PrefsCallback() {
             @Override
-            public void onAddCity(String city, FavoritesEntity fe) {
-                reloadView(fe);
+            public void onAddCity(String city) {
+                getWeather();
             }
         });
     }
@@ -98,23 +111,21 @@ public class FavoritesActivity extends AppCompatActivity {
         editMode = !editMode;
         adapter.setEditMode(editMode);
 
-        if(editMode){
-            menuItem.setIcon(getDrawable(R.drawable.ic_check_circle_24dp));
-        } else {
-            menuItem.setIcon(getDrawable(R.drawable.ic_delete_24dp));
-        }
+        if(editMode){ menuItem.setIcon(getDrawable(R.drawable.ic_check_circle_24dp)); }
+        else { menuItem.setIcon(getDrawable(R.drawable.ic_delete_24dp)); }
 
         if(!adapter.getRemoves().isEmpty()){
             for(String city : adapter.getRemoves()){
-                cities.remove(city);
+                for(int i = 0; i < fe.getCities().size(); i++){
+                    if(city.equalsIgnoreCase(fe.getCities().get(i))){
+                        fe.getCities().remove(i);
+                        fe.getFavorite().remove(i);
+                    }
+                }
             }
 
-            Prefs.updateFavorites(getApplicationContext(), cities, new Prefs.UpdateCallback() {
-                @Override
-                public void onUpdate(FavoritesEntity fe) {
-                    reloadView(fe);
-                }
-            });
+            Prefs.updateFavorites(getApplicationContext(), fe.getCities());
+            reloadView(fe);
         }
     }
 }
