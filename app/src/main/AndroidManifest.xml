@@ -11,6 +11,19 @@
         android:roundIcon="@drawable/ic_loading"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <receiver
+            android:name=".widget.WeatherWidgetProvider"
+            android:icon="@drawable/ic_launcher"
+            android:label="Weather Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info"/>
+        </receiver>
+
         <activity
             android:name=".app.viewController.HomeActivity"
             android:label="@string/app_name"
@@ -21,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".app.viewController.SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -29,6 +43,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anenha.weather.app.viewController.HomeActivity" />
         </activity>
+
         <activity
             android:name=".app.viewController.MoreInformationActivity"
             android:label="@string/action_more"
@@ -38,6 +53,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anenha.weather.app.viewController.HomeActivity" />
         </activity>
+
         <activity
             android:name=".app.viewController.FavoritesActivity"
             android:label="@string/title_activity_favorites"
@@ -47,6 +63,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anenha.weather.app.viewController.HomeActivity" />
         </activity>
+
     </application>
 
 </manifest>
