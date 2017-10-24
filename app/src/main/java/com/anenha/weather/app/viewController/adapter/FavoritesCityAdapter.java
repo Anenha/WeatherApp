@@ -104,7 +104,7 @@ public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdap
 
         if(fe != null){
             final TodayEntity te = fe.getFavorite().get(position).getTodayEntity();
-            holder.subtitle.setText(te.getLocal());
+            holder.subtitle.setText(te.getLocal(true));
             holder.image.setImageDrawable(te.getImage());
             holder.tempNow.setText(te.getTempNow());
             holder.tempHighLow.setText(te.getTempHigh() + "\n" + te.getTempLow());

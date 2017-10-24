@@ -4,8 +4,8 @@ import android.content.Context;
 import com.anenha.weather.R;
 import com.anenha.weather.app.model.Condition;
 import com.anenha.weather.app.model.Location;
-import com.anenha.weather.app.provider.TranslateCallback;
-import com.anenha.weather.app.provider.TranslateService;
+
+import java.text.NumberFormat;
 
 /**
  * Created by ajnen on 12/10/2017.
@@ -13,8 +13,12 @@ import com.anenha.weather.app.provider.TranslateService;
 
 public class Formatter {
 
-    public static String location(final Location location) {
-        return location.getCity() + ", " + location.getCountry();
+    public static String location(final Location location, final boolean fullLocation) {
+        StringBuilder locale = new StringBuilder();
+        locale.append(location.getCity()).append(", ");
+        if(fullLocation) { locale.append(location.getRegion().trim()).append(", "); }
+        locale.append(location.getCountry());
+        return locale.toString();
     }
 
     public static String temperature(final Integer temperture, final String tempUnit) {
@@ -75,9 +79,15 @@ public class Formatter {
         }
 
         final String[] finalDate = date.split(" ");
-        if(Integer.parseInt(finalDate[0]) < 10){ finalDate[0] = "0"+finalDate[0]; }
+
+        final NumberFormat intFormater = NumberFormat.getIntegerInstance();
+        intFormater.setMinimumIntegerDigits(2);
+        intFormater.setMaximumIntegerDigits(2);
+        intFormater.setGroupingUsed(false);
+        final String monthDay = intFormater.format(Integer.parseInt(finalDate[0]));
+
         finalDate[1] = getMonth(context, finalDate[1], monthInitials);
-        formatedDate = formatedDate + finalDate[0] + " " + finalDate[1];
+        formatedDate = formatedDate + monthDay + " " + finalDate[1];
 
         if(hasYear){ formatedDate = formatedDate + " " + finalDate[2]; }
         return formatedDate;

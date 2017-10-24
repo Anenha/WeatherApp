@@ -26,8 +26,8 @@ import com.anenha.weather.R;
 import com.anenha.weather.app.entity.TodayEntity;
 import com.anenha.weather.app.model.Channel;
 import com.anenha.weather.app.model.Forecast;
-import com.anenha.weather.app.provider.WeatherServiceCallback;
-import com.anenha.weather.app.provider.YahooWeatherService;
+import com.anenha.weather.app.provider.yahooWeather.WeatherServiceCallback;
+import com.anenha.weather.app.provider.yahooWeather.YahooWeatherService;
 import com.anenha.weather.app.utils.Prefs;
 import com.anenha.weather.app.viewController.adapter.HomeForecastAdapter;
 import java.util.List;
@@ -70,8 +70,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("REFRESH_CITY")){
             city = getIntent().getExtras().getString("REFRESH_CITY");
         } else {
-            city = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                    .getString(getString(R.string.pref_city_key), getString(R.string.pref_default_display_city));
+            city = Prefs.getInitialCity(this);
         }
 
         refreshWeather(city);
@@ -163,22 +162,34 @@ public class HomeActivity extends AppCompatActivity implements WeatherServiceCal
     @Override
     public void serviceSuccess(Channel channel) {
         this.channel = channel;
-        loading.setVisibility(View.GONE);
 
 //        ContentHomeBinding viewBinding = DataBindingUtil.setContentView(this, R.layout.content_home);
 //        viewBinding.setToday(new TodayEntity(getApplicationContext(), channel));
 
-        TodayEntity te = new TodayEntity(getApplicationContext(), channel);
+        new TodayEntity(getApplicationContext(), channel, new TodayEntity.TodayCallback() {
+            @Override
+            public void onCreate(TodayEntity te) {
+                loading.setVisibility(View.GONE);
+                loadTodayInfo(te);
+            }
+        });
+
+        loadForecast();
+    }
+
+    private void loadTodayInfo(TodayEntity te){
         WeatherIconImageView.setImageDrawable(te.getImage());
         HumidityText.setText(te.getHumidity());
         PressureText.setText(te.getPressure());
-        locationTextView.setText(te.getLocal());
+        locationTextView.setText(te.getLocal(false));
         day_date_today.setText(te.getDate());
         TemperatureTextView.setText(te.getTempNow());
         SunriseText.setText(te.getSunrise());
         SunsetText.setText(te.getSunset());
         ConditionTextView.setText(te.getCondition());
+    }
 
+    private void loadForecast(){
         final List<Forecast> forecast = channel.getItem().getForecast();
         if(channel.getItem().getCondition().getDate().split(",")[0].equalsIgnoreCase(forecast.get(0).getDay())){
             forecast.remove(0);

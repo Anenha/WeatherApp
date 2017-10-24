@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -15,8 +14,8 @@ import com.anenha.weather.app.entity.TodayEntity;
 import com.anenha.weather.app.model.Channel;
 import com.anenha.weather.app.model.Favorite;
 import com.anenha.weather.app.entity.FavoritesEntity;
-import com.anenha.weather.app.provider.WeatherServiceCallback;
-import com.anenha.weather.app.provider.YahooWeatherService;
+import com.anenha.weather.app.provider.yahooWeather.WeatherServiceCallback;
+import com.anenha.weather.app.provider.yahooWeather.YahooWeatherService;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -31,6 +30,11 @@ public class Prefs {
 
     public interface PrefsCallback { void onAddCity(String city); }
     public interface WeatherCallback { void onUpdate(FavoritesEntity fe); }
+
+    public static String getInitialCity(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(context.getString(R.string.pref_city_key), context.getString(R.string.pref_default_display_city));
+    }
 
     public static void addCityDialog(final Context context, final PrefsCallback callback){
 
@@ -85,28 +89,31 @@ public class Prefs {
         }
     }
 
-    private static List<String> getFavorites(Context context){
+    private static ArrayList<String> getFavorites(Context context){
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         final String favorites = sharedPref.getString(context.getString(R.string.pref_favorites_key), null);
         if(favorites == null){
             return new ArrayList<>();
         }
-        Log.e("Cities: ", favorites);
-        return new Gson().fromJson(favorites, ArrayList.class);
+        return new Gson().fromJson(favorites, (new ArrayList<String>()).getClass());
     }
 
     private static void addFavorite(final Context context, final List<Favorite> favorites,
                                     final List<String> cities, final String city, final Channel channel,
                                     final WeatherCallback callback){
-        favorites.add(new Favorite(city, new TodayEntity(context, channel)));
-        if(favorites.size() == cities.size()){
-            FavoritesEntity fe = new FavoritesEntity(favorites);
-            callback.onUpdate(fe);
-        }
+        favorites.add(new Favorite(city, new TodayEntity(context, channel, new TodayEntity.TodayCallback() {
+            @Override
+            public void onCreate(TodayEntity te) {
+                if(favorites.size() == cities.size()){
+                    FavoritesEntity fe = new FavoritesEntity(favorites);
+                    callback.onUpdate(fe);
+                }
+            }
+        })));
     }
 
     private static void addCity(final Context context, final String city, final PrefsCallback callback){
-        List<String> cities = getFavorites(context);
+        ArrayList<String> cities = getFavorites(context);
         cities.add(city);
         updateFavorites(context, cities);
         callback.onAddCity(city);

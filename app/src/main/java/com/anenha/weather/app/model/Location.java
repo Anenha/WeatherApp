@@ -9,12 +9,18 @@ public class Location {
     @SerializedName("city")
     @Expose
     private String city;
-    @SerializedName("country")
-    @Expose
-    private String country;
     @SerializedName("region")
     @Expose
     private String region;
+    @SerializedName("country")
+    @Expose
+    private String country;
+
+    public Location(String city, String region, String country) {
+        this.city = city.trim();
+        this.region = region.trim();
+        this.country = country.trim();
+    }
 
     public String getCity() {
         return city;

@@ -15,6 +15,8 @@ import com.anenha.weather.app.entity.FavoritesEntity;
 import com.anenha.weather.app.utils.Prefs;
 import com.anenha.weather.app.viewController.adapter.FavoritesCityAdapter;
 
+import java.util.Collections;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -72,6 +74,7 @@ public class FavoritesActivity extends AppCompatActivity {
         }
         else {
             isLoading(false);
+            Collections.sort(this.fe.getFavorite());
             favoritesRcycler.setLayoutManager(new LinearLayoutManager(this));
             adapter = new FavoritesCityAdapter(this, fe, editMode);
             favoritesRcycler.setAdapter(adapter);

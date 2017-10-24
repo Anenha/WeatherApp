@@ -1,5 +1,7 @@
 package com.anenha.weather.app.entity;
 
+import android.support.annotation.NonNull;
+
 import com.anenha.weather.app.model.Favorite;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -33,4 +35,5 @@ public class FavoritesEntity {
     public List<Favorite> getFavorite() {
         return favorite;
     }
+
 }
