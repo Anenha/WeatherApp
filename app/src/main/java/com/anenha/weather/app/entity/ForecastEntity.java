@@ -1,11 +1,7 @@
 package com.anenha.weather.app.entity;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
-import android.preference.PreferenceManager;
-
-import com.anenha.weather.R;
 import com.anenha.weather.app.model.Condition;
 import com.anenha.weather.app.model.Forecast;
 import com.anenha.weather.app.utils.Formatter;

@@ -15,9 +15,6 @@ import com.anenha.weather.app.entity.FavoritesEntity;
 import com.anenha.weather.app.utils.Prefs;
 import com.anenha.weather.app.viewController.adapter.FavoritesCityAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

@@ -15,7 +15,6 @@ import com.anenha.weather.app.entity.TodayEntity;
 import com.anenha.weather.app.model.Channel;
 import com.anenha.weather.app.model.Favorite;
 import com.anenha.weather.app.entity.FavoritesEntity;
-import com.anenha.weather.app.model.Favorites;
 import com.anenha.weather.app.provider.WeatherServiceCallback;
 import com.anenha.weather.app.provider.YahooWeatherService;
 import com.google.gson.Gson;
@@ -57,7 +56,7 @@ public class Prefs {
     public static void updateFavorites(final Context context, final List<String> cities){
         final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(context.getString(R.string.pref_favorites_key), new Gson().toJson(new Favorites(cities)));
+        editor.putString(context.getString(R.string.pref_favorites_key), new Gson().toJson(cities));
         editor.apply();
     }
 
@@ -92,8 +91,8 @@ public class Prefs {
         if(favorites == null){
             return new ArrayList<>();
         }
-        Log.e("CIDADES: ", favorites);
-        return new Gson().fromJson(favorites, Favorites.class).getCities();
+        Log.e("Cities: ", favorites);
+        return new Gson().fromJson(favorites, ArrayList.class);
     }
 
     private static void addFavorite(final Context context, final List<Favorite> favorites,

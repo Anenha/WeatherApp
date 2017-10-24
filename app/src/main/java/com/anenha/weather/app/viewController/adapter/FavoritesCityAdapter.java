@@ -2,11 +2,7 @@ package com.anenha.weather.app.viewController.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +22,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.anenha.weather.R.id.parent;
-
 /**
  * Created by ajnen on 16/10/2017.
+ *
  */
 
 public class FavoritesCityAdapter extends RecyclerView.Adapter<FavoritesCityAdapter.ViewHolder> {
