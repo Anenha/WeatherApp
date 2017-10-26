@@ -36,7 +36,7 @@ public class ForecastEntity extends CoreEntity {
     }
 
     private void setImage() {
-        int resourceId = context.getResources().getIdentifier("drawable/icon_" + forecast.getCode(), null, context.getPackageName());
+        int resourceId = context.getResources().getIdentifier("drawable/weather_icon_" + forecast.getCode(), null, context.getPackageName());
         this.image = context.getDrawable(resourceId);
     }
 

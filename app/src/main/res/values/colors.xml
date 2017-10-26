@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="menuIcon">#FFFFFF</color>
+    <color name="alpha_white">#DDFFFFFF</color>
+    <color name="grey">#AAAAAA</color>
+    <color name="alpha_light_blue">#DD5FA8FA</color>
+    <color name="light_blue">#5FA8FA</color>
+    <color name="blue">#A50768D6</color>
+    <color name="dark_blue">#012965</color>
+    
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#1a09d6</color>
-    <color name="menuIcon">#FFFFFF</color>
+    <color name="colorAccent">#1A09D6</color>
+    
+    
+    
+    
 </resources>

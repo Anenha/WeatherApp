@@ -42,7 +42,7 @@
         android:layout_width="100dp"
         android:layout_height="90dp"
         android:id="@+id/WeatherIconImageView"
-        android:src="@drawable/icon_na"
+        android:src="@drawable/weather_icon_na"
         android:layout_marginTop="5dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         app:layout_constraintLeft_toLeftOf="@+id/LocationTextView"

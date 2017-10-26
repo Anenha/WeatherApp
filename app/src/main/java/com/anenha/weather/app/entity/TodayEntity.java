@@ -54,9 +54,9 @@ public class TodayEntity extends CoreEntity {
 
         final Integer code = Integer.parseInt(condition.getCode());
         if (code >= 0 && code <= 47) {
-            resourceId = context.getResources().getIdentifier("drawable/icon_" + condition.getCode(), null, context.getPackageName());
+            resourceId = context.getResources().getIdentifier("drawable/weather_icon_" + condition.getCode(), null, context.getPackageName());
         } else {
-            resourceId = context.getResources().getIdentifier("drawable/icon_na", null, context.getPackageName());
+            resourceId = context.getResources().getIdentifier("drawable/weather_icon_na", null, context.getPackageName());
         }
 
         this.image =  context.getDrawable(resourceId);
