@@ -6,14 +6,21 @@
     android:background="@drawable/background_loading"
     android:id="@+id/loading">
 
-    <ProgressBar
-        style="?android:attr/progressBarPadding"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:indeterminate="true"
-        android:max="100"
-        android:backgroundTint="@android:color/white"
-        android:indeterminateTint="@color/colorAccent" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:elevation="5dp"
+        android:background="@drawable/circle">
+        <ProgressBar
+            style="?android:attr/progressBarPadding"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:backgroundTint="@android:color/white"
+            android:indeterminateTint="@color/colorAccent" />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
