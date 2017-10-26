@@ -23,6 +23,8 @@
     <string name="pref_favorites_key">favorites_list</string>
     <string name="added_favorite_cty_snack">Added city: %s</string>
     <string name="favorite_empty_msg">You do not have any favorite cities yet.\nTap the "+" to add cities.</string>
+    <string name="app_update_label">Updating...</string>
+    <string name="app_update_date">Updated: %s</string>
 
     <string name="test_text">Lorem Ipsum</string>
 

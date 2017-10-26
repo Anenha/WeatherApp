@@ -21,6 +21,8 @@
     <string name="add_city_dialog_negative_button">Cancelar</string>
     <string name="added_favorite_cty_snack">Cidade adicionada: %s</string>
     <string name="favorite_empty_msg">Você ainda não tem cidades favoritas.\nToque no "+" para adicionar cidades.</string>
+    <string name="app_update_label">Atualizando...</string>
+    <string name="app_update_date">Atualizado: %s</string>
 
     <string-array name="weekdays">
         <item>Domingo</item>
