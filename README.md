@@ -7,4 +7,4 @@ This is a weather app, it uses [Yahoo Weather API](https://developer.yahoo.com/w
 Just clone and run!
 
 ### Screenshots
-![Home screenshot](assets/screenshot_01.png?raw=true "Home")
+<img width="40%" alt="home screenshot" src="assets/screenshot_01.png">
