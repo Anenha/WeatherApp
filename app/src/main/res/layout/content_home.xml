@@ -19,9 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Medium"
-        android:text="@string/location"
+        android:text="@{today.getLocal(false)}"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:id="@+id/LocationTextView"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:id="@+id/locationTextView"
         android:textStyle="bold"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintLeft_creator="1"
@@ -33,41 +34,44 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:text="day, date today"
-        android:id="@+id/textView14"
-        app:layout_constraintLeft_toLeftOf="@id/LocationTextView"
-        app:layout_constraintTop_toBottomOf="@+id/LocationTextView" />
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:text="@{today.date}"
+        android:id="@+id/fullDateTodayTextView"
+        app:layout_constraintLeft_toLeftOf="@id/locationTextView"
+        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="90dp"
-        android:id="@+id/WeatherIconImageView"
-        android:src="@drawable/weather_icon_na"
+        android:id="@+id/weatherIconImageView"
+        android:src="@{today.image}"
         android:layout_marginTop="5dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        app:layout_constraintLeft_toLeftOf="@+id/LocationTextView"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"/>
+        app:layout_constraintLeft_toLeftOf="@id/locationTextView"
+        app:layout_constraintTop_toBottomOf="@id/fullDateTodayTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Large"
-        android:text="@string/temperature"
+        android:text="@{today.tempNow}"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:id="@+id/TemperatureTextView"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:id="@+id/temperatureTextView"
         android:textStyle="bold"
         android:typeface="serif"
-        app:layout_constraintTop_toBottomOf="@+id/WeatherIconImageView"
+        app:layout_constraintTop_toBottomOf="@id/weatherIconImageView"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@string/condition"
+        android:text="@{today.condition}"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:id="@+id/ConditionTextView"
-        app:layout_constraintTop_toBottomOf="@+id/TemperatureTextView"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:id="@+id/conditionTextView"
+        app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
@@ -93,9 +97,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="lorem ipsum"
+        android:text="@{today.sunrise}"
         android:layout_marginEnd="40dp"
         android:paddingStart="10dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:id="@+id/sunrisetextView"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -107,10 +112,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="lorem ipsum"
+        android:text="@{today.sunset}"
         android:id="@+id/sunsettextView"
         android:layout_marginTop="10dp"
         android:paddingStart="10dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintStart_toEndOf="@id/sunset"
         app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
         app:layout_constraintTop_toBottomOf="@+id/sunrisetextView" />
@@ -129,10 +135,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="lorem ipsum"
+        android:text="@{today.humidity}"
         android:id="@+id/humiditytextView"
         android:layout_marginTop="10dp"
         android:paddingStart="10dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintStart_toEndOf="@id/humidity"
         app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
         app:layout_constraintTop_toBottomOf="@+id/sunsettextView" />
@@ -154,9 +161,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="lorem ipsum"
+        android:text="@{today.pressure}"
         android:id="@+id/pressuretextView"
         android:paddingStart="10dp"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintStart_toEndOf="@id/pressure"
         app:layout_constraintBottom_toBottomOf="@+id/pressure"
         app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView" />
@@ -169,7 +177,7 @@
         android:layout_marginTop="15dp"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintTop_toBottomOf="@id/ConditionTextView"
+        app:layout_constraintTop_toBottomOf="@id/conditionTextView"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -193,13 +201,13 @@
         android:layout_margin="2dp"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/forecast_recycler"
-        app:layout_constraintBottom_toBottomOf="@+id/forecast_recycler"/>
+        app:layout_constraintTop_toTopOf="@+id/homeForecastRecycler"
+        app:layout_constraintBottom_toBottomOf="@+id/homeForecastRecycler"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/forecast_recycler"
+        android:id="@+id/homeForecastRecycler"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:paddingStart="@dimen/activity_horizontal_margin"
@@ -216,11 +224,11 @@
         android:layout_margin="2dp"
         android:visibility="gone"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/forecast_recycler"
-        app:layout_constraintBottom_toBottomOf="@id/forecast_recycler" />
+        app:layout_constraintTop_toTopOf="@id/homeForecastRecycler"
+        app:layout_constraintBottom_toBottomOf="@id/homeForecastRecycler" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/homeFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
