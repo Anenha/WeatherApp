@@ -3,10 +3,10 @@ package com.anenha.weather.app.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class YahooResponseModel {
+class ResultsModel {
 
-    @SerializedName("query")
+    @SerializedName("channel")
     @Expose
-    var query: QueryModel? = null
+    var channel: ChannelModel? = null
 
 }

@@ -2,8 +2,8 @@ package com.anenha.weather.app.utils
 
 import android.content.Context
 import com.anenha.weather.R
-import com.anenha.weather.app.model.Condition
-import com.anenha.weather.app.model.Location
+import com.anenha.weather.app.model.ConditionModel
+import com.anenha.weather.app.model.LocationModel
 
 import java.text.NumberFormat
 
@@ -13,7 +13,7 @@ import java.text.NumberFormat
 
 object Formatter {
 
-    fun location(location: Location, fullLocation: Boolean): String {
+    fun location(location: LocationModel, fullLocation: Boolean): String {
         val locale = StringBuilder()
         locale.append(location.city).append(", ")
         if (fullLocation) {
@@ -47,7 +47,7 @@ object Formatter {
         return getDate(context, day, date, monthInitials, hasYear)
     }
 
-    fun conditionDescription(context: Context, condition: Condition): String {
+    fun conditionDescription(context: Context, condition: ConditionModel): String {
         val conditionsArray = context.resources.getStringArray(R.array.condition_descriptions)
         val code = Integer.parseInt(condition.code)
         return if (code >= 0 && code <= 47) {

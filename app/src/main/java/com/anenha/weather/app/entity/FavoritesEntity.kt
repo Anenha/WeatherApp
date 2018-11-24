@@ -1,6 +1,6 @@
 package com.anenha.weather.app.entity
 
-import com.anenha.weather.app.model.Favorite
+import com.anenha.weather.app.model.FavoriteModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +12,7 @@ import java.util.ArrayList
 
 class FavoritesEntity(@field:SerializedName("favorite")
                       @field:Expose
-                      val favorite: MutableList<Favorite>?) {
+                      val favorite: MutableList<FavoriteModel>?) {
 
     val cities: MutableList<String>
         get() {

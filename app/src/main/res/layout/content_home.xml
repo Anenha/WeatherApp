@@ -6,38 +6,53 @@
         <variable name="today" type="com.anenha.weather.app.entity.TodayEntity"/>
     </data>
 
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.viewController.HomeActivity"
+    tools:context=".app.ui.HomeActivity"
     tools:showIn="@layout/activity_home"
     android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
     android:background="@drawable/background">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/gpsLocationImage"
+        android:layout_width="17dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_location"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Medium"
         android:text="@{today.getLocal(false)}"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:id="@+id/locationTextView"
         android:textStyle="bold"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/gpsLocationImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:text="@{today.date}"
         android:id="@+id/fullDateTodayTextView"
-        app:layout_constraintLeft_toLeftOf="@id/locationTextView"
+        app:layout_constraintLeft_toLeftOf="@id/gpsLocationImage"
         app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
     <ImageView
@@ -46,7 +61,6 @@
         android:id="@+id/weatherIconImageView"
         android:src="@{today.image}"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
         app:layout_constraintLeft_toLeftOf="@id/locationTextView"
         app:layout_constraintTop_toBottomOf="@id/fullDateTodayTextView"/>
 
@@ -55,8 +69,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Large"
         android:text="@{today.tempNow}"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:id="@+id/temperatureTextView"
         android:textStyle="bold"
         android:typeface="serif"
@@ -68,8 +80,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/AppTheme.TextAppearance.Small"
         android:text="@{today.condition}"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:id="@+id/conditionTextView"
         app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -125,7 +135,7 @@
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:id="@+id/humidity"
-        android:src="@drawable/umidade"
+        android:src="@drawable/ic_humidity"
         android:layout_marginTop="@dimen/home_icon_margin"
         app:layout_constraintBottom_toBottomOf="@+id/humiditytextView"
         app:layout_constraintRight_toRightOf="@+id/sunset"
@@ -175,8 +185,6 @@
         android:id="@+id/barraImageView"
         android:src="@drawable/barra"
         android:layout_marginTop="15dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintTop_toBottomOf="@id/conditionTextView"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -184,8 +192,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         android:text="@string/forecast"
         android:id="@+id/PevisaotextView"
         android:textColor="#306060"
@@ -210,8 +216,6 @@
         android:id="@+id/homeForecastRecycler"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
         app:layout_constraintTop_toBottomOf="@+id/PevisaotextView"
         app:layout_constraintStart_toEndOf="@id/leftarrow"
         app:layout_constraintEnd_toStartOf="@+id/rightarrow"/>
@@ -235,7 +239,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_add_24dp" />
+        app:srcCompat="@drawable/ic_add" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -247,7 +251,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
+        </android.support.constraint.ConstraintLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
 </layout>

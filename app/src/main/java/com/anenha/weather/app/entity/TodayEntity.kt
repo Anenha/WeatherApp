@@ -5,10 +5,10 @@ import android.graphics.drawable.Drawable
 import android.util.Range
 
 import com.anenha.weather.R
-import com.anenha.weather.app.model.Channel
-import com.anenha.weather.app.model.Location
-import com.anenha.weather.app.provider.translate.TranslateCallback
-import com.anenha.weather.app.provider.translate.TranslateService
+import com.anenha.weather.app.model.ChannelModel
+import com.anenha.weather.app.model.LocationModel
+import com.anenha.weather.app.repository.translate.TranslateCallback
+import com.anenha.weather.app.repository.translate.TranslateService
 import com.anenha.weather.app.utils.Formatter
 
 import java.util.Locale
@@ -17,7 +17,7 @@ import java.util.Locale
  * Created by ajnen on 13/10/2017.
  */
 
-class TodayEntity(context: Context, channel: Channel, todayCallback: TodayCallback) : CoreEntity(context) {
+class TodayEntity(context: Context, channel: ChannelModel, todayCallback: TodayCallback) : CoreEntity(context) {
     private var resourceId: Int = 0
     val image: Drawable?
     val humidity: String
@@ -82,7 +82,7 @@ class TodayEntity(context: Context, channel: Channel, todayCallback: TodayCallba
         })
     }
 
-    private fun setLocal(location: Location, callback: Callback) {
+    private fun setLocal(location: LocationModel, callback: Callback) {
         val language = Locale.getDefault().language
         val locale = Formatter.location(location, true)
 
@@ -105,7 +105,16 @@ class TodayEntity(context: Context, channel: Channel, todayCallback: TodayCallba
     fun getLocal(fullLocation: Boolean): String {
         if (local != null) {
             val locale = local!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            return Formatter.location(Location(locale[0], locale[1], locale[2]), fullLocation)
+            return Formatter.location(LocationModel(locale[0], locale[1], locale[2]), fullLocation)
+        }
+
+        return ""
+    }
+
+    fun getCity(): String {
+        if (local != null) {
+            val locale = local!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            return locale[0]
         }
 
         return ""

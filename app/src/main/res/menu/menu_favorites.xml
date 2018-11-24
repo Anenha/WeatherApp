@@ -6,7 +6,7 @@
     <item
         android:id="@+id/action_add"
         android:orderInCategory="2"
-        android:icon="@drawable/ic_add_24dp"
+        android:icon="@drawable/ic_add"
         android:tint="?attr/colorControlNormal"
         app:showAsAction="always"
         android:title="" />
@@ -14,7 +14,7 @@
     <item
         android:id="@+id/action_remove"
         android:orderInCategory="3"
-        android:icon="@drawable/ic_delete_24dp"
+        android:icon="@drawable/ic_delete"
         android:tint="?attr/colorControlNormal"
         app:showAsAction="always"
         android:title="" />

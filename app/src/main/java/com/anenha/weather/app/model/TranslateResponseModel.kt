@@ -10,8 +10,8 @@ import com.google.gson.annotations.SerializedName
 class TranslateResponseModel {
     @SerializedName("extract")
     @Expose
-    var extract: Extract? = null
+    var extract: ExtractModel? = null
     @SerializedName("originalResponse")
     @Expose
-    var originalResponse: String? = null
+    var originalResponse: String = ""
 }

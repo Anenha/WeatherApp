@@ -2,8 +2,8 @@ package com.anenha.weather.app.entity
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import com.anenha.weather.app.model.Condition
-import com.anenha.weather.app.model.Forecast
+import com.anenha.weather.app.model.ConditionModel
+import com.anenha.weather.app.model.ForecastModel
 import com.anenha.weather.app.utils.Formatter
 
 
@@ -11,7 +11,7 @@ import com.anenha.weather.app.utils.Formatter
  * Created by ajnen on 12/10/2017.
  */
 
-class ForecastEntity(private val context: Context, private val forecast: Forecast) : CoreEntity(context) {
+class ForecastEntity(private val context: Context, private val forecast: ForecastModel) : CoreEntity(context) {
     var image: Drawable? = null
     var date: String = ""
     var day: String = ""
@@ -50,7 +50,7 @@ class ForecastEntity(private val context: Context, private val forecast: Forecas
     }
 
     private fun setText() {
-        val condition = Condition()
+        val condition = ConditionModel()
         condition.code = forecast.code
         condition.text = forecast.text
         this.description = Formatter.conditionDescription(context, condition)

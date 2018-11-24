@@ -1,8 +1,6 @@
 package com.anenha.weather.app.utils
 
 import android.content.Context
-import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
@@ -11,11 +9,11 @@ import android.widget.EditText
 
 import com.anenha.weather.R
 import com.anenha.weather.app.entity.TodayEntity
-import com.anenha.weather.app.model.Channel
-import com.anenha.weather.app.model.Favorite
+import com.anenha.weather.app.model.ChannelModel
+import com.anenha.weather.app.model.FavoriteModel
 import com.anenha.weather.app.entity.FavoritesEntity
-import com.anenha.weather.app.provider.yahooWeather.WeatherServiceCallback
-import com.anenha.weather.app.provider.yahooWeather.YahooWeatherService
+import com.anenha.weather.app.repository.yahooWeather.WeatherServiceCallback
+import com.anenha.weather.app.repository.yahooWeather.YahooWeatherService
 import com.google.gson.Gson
 
 import java.util.ArrayList
@@ -38,6 +36,18 @@ object Prefs {
     fun getInitialCity(context: Context): String {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(context.getString(R.string.pref_city_key), context.getString(R.string.pref_default_display_city))
+    }
+
+    fun canUseGpsLocation(context: Context): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(context.getString(R.string.pref_location_key), false)
+    }
+
+    fun useGpsLocation(context: Context, canUse: Boolean) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = sharedPref.edit()
+        editor.putBoolean(context.getString(R.string.pref_location_key), canUse)
+        editor.apply()
     }
 
     fun addCityDialog(context: Context, callback: PrefsCallback) {
@@ -64,13 +74,13 @@ object Prefs {
 
     fun getFavoritesWeather(context: Context, callback: WeatherCallback) {
         val cities = getFavorites(context)
-        val favorites = ArrayList<Favorite>()
+        val favorites = ArrayList<FavoriteModel>()
         if (!cities.isEmpty()) {
             var yahooService: YahooWeatherService
             for (pos in cities.indices) {
                 val city = cities[pos]
                 yahooService = YahooWeatherService(object : WeatherServiceCallback {
-                    override fun serviceSuccess(channel: Channel) {
+                    override fun serviceSuccess(channel: ChannelModel) {
                         addFavorite(context, favorites, cities, city, channel, callback)
                     }
 
@@ -92,10 +102,10 @@ object Prefs {
         return Gson().fromJson<ArrayList<String>>(favorites, ArrayList<String>().javaClass)
     }
 
-    private fun addFavorite(context: Context, favorites: MutableList<Favorite>,
-                            cities: List<String>, city: String, channel: Channel?,
+    private fun addFavorite(context: Context, favorites: MutableList<FavoriteModel>,
+                            cities: List<String>, city: String, channel: ChannelModel?,
                             callback: WeatherCallback) {
-        favorites.add(Favorite(city, TodayEntity(context, channel!!, object : TodayEntity.TodayCallback {
+        favorites.add(FavoriteModel(city, TodayEntity(context, channel!!, object : TodayEntity.TodayCallback {
             override fun onCreate(te: TodayEntity) {
                 if (favorites.size == cities.size) {
                     val fe = FavoritesEntity(favorites)
