@@ -18,19 +18,43 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <receiver
-            android:name=".widget.WeatherWidgetProvider"
-            android:icon="@drawable/ic_launcher"
-            android:label="Weather Widget">
+            android:name=".widget.WeatherWidgetProviderLarge"
+            android:icon="@mipmap/ic_launcher"
+            android:label="Large">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info"/>
+                android:resource="@xml/widget_info_large"/>
+        </receiver>
+
+        <receiver
+            android:name=".widget.WeatherWidgetProviderMedium"
+            android:icon="@mipmap/ic_launcher"
+            android:label="Medium">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_medium"/>
+        </receiver>
+
+        <receiver
+            android:name=".widget.WeatherWidgetProviderSmall"
+            android:icon="@mipmap/ic_launcher"
+            android:label="Small">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info_small"/>
         </receiver>
 
         <activity
-            android:name=".app.viewController.HomeActivity"
+            android:name=".app.ui.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,32 +65,32 @@
         </activity>
 
         <activity
-            android:name=".app.viewController.SettingsActivity"
+            android:name=".app.ui.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".app.viewController.HomeActivity">
+            android:parentActivityName=".app.ui.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anenha.weather.app.viewController.HomeActivity" />
+                android:value="com.anenha.weather.app.ui.HomeActivity" />
         </activity>
 
         <activity
-            android:name=".app.viewController.MoreInformationActivity"
+            android:name=".app.ui.MoreInformationActivity"
             android:label="@string/action_more"
-            android:parentActivityName=".app.viewController.HomeActivity"
+            android:parentActivityName=".app.ui.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anenha.weather.app.viewController.HomeActivity" />
+                android:value="com.anenha.weather.app.ui.HomeActivity" />
         </activity>
 
         <activity
-            android:name=".app.viewController.FavoritesActivity"
+            android:name=".app.ui.FavoritesActivity"
             android:label="@string/title_activity_favorites"
-            android:parentActivityName=".app.viewController.HomeActivity"
+            android:parentActivityName=".app.ui.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anenha.weather.app.viewController.HomeActivity" />
+                android:value="com.anenha.weather.app.ui.HomeActivity" />
         </activity>
 
     </application>

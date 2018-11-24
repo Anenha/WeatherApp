@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.anenha.weather.app.viewController.FavoritesActivity">
+    tools:context="com.anenha.weather.app.ui.FavoritesActivity">
 
     <item
         android:id="@+id/action_add"

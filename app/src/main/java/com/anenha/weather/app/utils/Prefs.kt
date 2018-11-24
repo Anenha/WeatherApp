@@ -43,6 +43,11 @@ object Prefs {
                 .getBoolean(context.getString(R.string.pref_location_key), false)
     }
 
+    fun isTransparentMode(context: Context): Boolean {
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(context.getString(R.string.pref_widget_color_key), false)
+    }
+
     fun useGpsLocation(context: Context, canUse: Boolean) {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPref.edit()

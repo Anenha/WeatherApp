@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="7dp"
+    android:paddingEnd="10dp"
+    android:orientation="horizontal"
+    android:background="@android:color/transparent"
+    android:baselineAligned="false"
+    android:weightSum="2">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:layout_weight="0.8">
+
+        <ImageView
+            android:id="@+id/widget_gps_image_view"
+            android:layout_width="13dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_location_white"/>
+
+        <TextView
+            android:id="@+id/widget_locale"
+            style="@style/AppTheme.TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/menuIcon"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/widget_gps_image_view"
+            android:text="@string/test_text" />
+
+        <TextView
+            android:id="@+id/widget_condition"
+            style="@style/AppTheme.TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/menuIcon"
+            android:layout_below="@id/widget_locale"
+            android:layout_marginStart="2dp"
+            android:text="@string/test_text" />
+
+        <LinearLayout
+            android:id="@+id/widget_sync_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_sync_white"/>
+            <TextView
+                android:id="@+id/widget_update_label"
+                style="@style/AppTheme.TextAppearance.Small"
+                android:textSize="11sp"
+                android:textColor="@color/menuIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/test_text">
+            </TextView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/widget_image"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:paddingEnd="10dp"
+        android:src="@drawable/weather_icon_na" />
+
+    <TextView
+        android:id="@+id/widget_temp_now"
+        style="@style/AppTheme.TextAppearance.Large"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="0.3"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/menuIcon"
+        android:layout_marginStart="5dp"
+        android:text="@string/test_text" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginStart="5dp">
+
+        <TextView
+            android:id="@+id/widget_temp_high"
+            style="@style/AppTheme.TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:textColor="@color/menuIcon"
+            android:layout_height="wrap_content"
+            android:text="@string/test_text" />
+
+        <TextView
+            android:id="@+id/widget_high_low"
+            style="@style/AppTheme.TextAppearance.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/menuIcon"
+            android:layout_marginTop="4dp"
+            android:text="@string/test_text" />
+    </LinearLayout>
+</LinearLayout>
