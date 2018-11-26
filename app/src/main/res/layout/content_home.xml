@@ -2,258 +2,251 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="today" type="com.anenha.weather.app.entity.TodayEntity"/>
+
+        <variable
+            name="today"
+            type="com.anenha.weather.app.entity.TodayEntity" />
     </data>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".app.ui.HomeActivity"
-    tools:showIn="@layout/activity_home"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:background="@drawable/background">
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeToRefresh"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".app.ui.HomeActivity"
+        tools:showIn="@layout/activity_home">
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeToRefresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/gpsLocationImage"
-        android:layout_width="17dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_location"
-        android:visibility="visible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Medium"
-        android:text="@{today.getLocal(false)}"
-        android:id="@+id/locationTextView"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/gpsLocationImage"
-        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/gpsLocationImage"
+                    android:layout_width="17dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_location"
+                    android:visibility="visible"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.date}"
-        android:id="@+id/fullDateTodayTextView"
-        app:layout_constraintLeft_toLeftOf="@id/gpsLocationImage"
-        app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
+                <TextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{today.getLocal(false)}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Medium"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/gpsLocationImage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="90dp"
-        android:id="@+id/weatherIconImageView"
-        android:src="@{today.image}"
-        android:layout_marginTop="5dp"
-        app:layout_constraintLeft_toLeftOf="@id/locationTextView"
-        app:layout_constraintTop_toBottomOf="@id/fullDateTodayTextView"/>
+                <TextView
+                    android:id="@+id/fullDateTodayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{today.date}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintLeft_toLeftOf="@id/gpsLocationImage"
+                    app:layout_constraintTop_toBottomOf="@+id/locationTextView" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Large"
-        android:text="@{today.tempNow}"
-        android:id="@+id/temperatureTextView"
-        android:textStyle="bold"
-        android:typeface="serif"
-        app:layout_constraintTop_toBottomOf="@id/weatherIconImageView"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                <ImageView
+                    android:id="@+id/weatherIconImageView"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingEnd="20dp"
+                    android:src="@{today.image}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fullDateTodayTextView" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.condition}"
-        android:id="@+id/conditionTextView"
-        app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                <TextView
+                    android:id="@+id/temperatureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{today.tempNow}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Large"
+                    android:textStyle="bold"
+                    android:typeface="serif"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/weatherIconImageView" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:id="@+id/sunrise"
-        android:src="@drawable/sunrise"
-        app:layout_constraintBottom_toBottomOf="@+id/sunrisetextView"
-        app:layout_constraintEnd_toStartOf="@+id/sunrisetextView"
-        tools:layout_editor_absoluteX="184dp" />
+                <TextView
+                    android:id="@+id/conditionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{today.condition}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/temperatureTextView" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:id="@+id/sunset"
-        android:src="@drawable/sunset"
-        android:layout_marginTop="@dimen/home_icon_margin"
-        app:layout_constraintLeft_toLeftOf="@+id/sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/sunrise"
-        app:layout_constraintBottom_toBottomOf="@+id/sunsettextView"/>
+                <ImageView
+                    android:id="@+id/moreInfoIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_open_in_new"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="5dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.sunrise}"
-        android:layout_marginEnd="40dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:id="@+id/sunrisetextView"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginTop="68dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/sunrise"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/sunrise"
+                    app:layout_constraintBottom_toBottomOf="@+id/sunrisetextView"
+                    app:layout_constraintEnd_toStartOf="@+id/sunrisetextView"
+                    tools:layout_editor_absoluteX="184dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.sunset}"
-        android:id="@+id/sunsettextView"
-        android:layout_marginTop="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintStart_toEndOf="@id/sunset"
-        app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
-        app:layout_constraintTop_toBottomOf="@+id/sunrisetextView" />
+                <ImageView
+                    android:id="@+id/sunset"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="@dimen/home_icon_margin"
+                    android:src="@drawable/sunset"
+                    app:layout_constraintBottom_toBottomOf="@+id/sunsettextView"
+                    app:layout_constraintLeft_toLeftOf="@+id/sunrise"
+                    app:layout_constraintTop_toBottomOf="@+id/sunrise" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="20dp"
-        android:id="@+id/humidity"
-        android:src="@drawable/ic_humidity"
-        android:layout_marginTop="@dimen/home_icon_margin"
-        app:layout_constraintBottom_toBottomOf="@+id/humiditytextView"
-        app:layout_constraintRight_toRightOf="@+id/sunset"
-        app:layout_constraintTop_toBottomOf="@+id/sunset" />
+                <TextView
+                    android:id="@+id/sunrisetextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="68dp"
+                    android:layout_marginEnd="40dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@{today.sunrise}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_constraintRight_creator="1"
+                    tools:layout_constraintTop_creator="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.humidity}"
-        android:id="@+id/humiditytextView"
-        android:layout_marginTop="10dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintStart_toEndOf="@id/humidity"
-        app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
-        app:layout_constraintTop_toBottomOf="@+id/sunsettextView" />
+                <TextView
+                    android:id="@+id/sunsettextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@{today.sunset}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
+                    app:layout_constraintStart_toEndOf="@id/sunset"
+                    app:layout_constraintTop_toBottomOf="@+id/sunrisetextView" />
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="20dp"
-        android:id="@+id/pressure"
-        android:src="@drawable/pressao"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/humidity"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/humidity"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/humidity" />
+                <ImageView
+                    android:id="@+id/humidity"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="@dimen/home_icon_margin"
+                    android:src="@drawable/ic_humidity"
+                    app:layout_constraintBottom_toBottomOf="@+id/humiditytextView"
+                    app:layout_constraintRight_toRightOf="@+id/sunset"
+                    app:layout_constraintTop_toBottomOf="@+id/sunset" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/AppTheme.TextAppearance.Small"
-        android:text="@{today.pressure}"
-        android:id="@+id/pressuretextView"
-        android:paddingStart="10dp"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        app:layout_constraintStart_toEndOf="@id/pressure"
-        app:layout_constraintBottom_toBottomOf="@+id/pressure"
-        app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView" />
+                <TextView
+                    android:id="@+id/humiditytextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@{today.humidity}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
+                    app:layout_constraintStart_toEndOf="@id/humidity"
+                    app:layout_constraintTop_toBottomOf="@+id/sunsettextView" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/barraImageView"
-        android:src="@drawable/barra"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/conditionTextView"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                <ImageView
+                    android:id="@+id/pressure"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/pressao"
+                    app:layout_constraintLeft_toLeftOf="@+id/humidity"
+                    app:layout_constraintRight_toRightOf="@+id/humidity"
+                    app:layout_constraintTop_toBottomOf="@+id/humidity"
+                    tools:layout_constraintLeft_creator="1"
+                    tools:layout_constraintRight_creator="1"
+                    tools:layout_constraintTop_creator="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/forecast"
-        android:id="@+id/PevisaotextView"
-        android:textColor="#306060"
-        android:textStyle="bold|italic"
-        app:layout_constraintTop_toBottomOf="@+id/barraImageView"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                <TextView
+                    android:id="@+id/pressuretextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@{today.pressure}"
+                    android:textAppearance="@style/AppTheme.TextAppearance.Small"
+                    app:layout_constraintBottom_toBottomOf="@+id/pressure"
+                    app:layout_constraintLeft_toLeftOf="@+id/sunrisetextView"
+                    app:layout_constraintStart_toEndOf="@id/pressure" />
 
-    <ImageView
-        android:layout_width="10dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_left"
-        android:id="@+id/leftarrow"
-        android:layout_margin="2dp"
-        android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/homeForecastRecycler"
-        app:layout_constraintBottom_toBottomOf="@+id/homeForecastRecycler"/>
+                <ImageView
+                    android:id="@+id/barraImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/barra"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/conditionTextView" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/homeForecastRecycler"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/PevisaotextView"
-        app:layout_constraintStart_toEndOf="@id/leftarrow"
-        app:layout_constraintEnd_toStartOf="@+id/rightarrow"/>
+                <TextView
+                    android:id="@+id/PevisaotextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/forecast"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#306060"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/barraImageView" />
 
-    <ImageView
-        android:layout_width="10dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_right"
-        android:id="@+id/rightarrow"
-        android:layout_margin="2dp"
-        android:visibility="gone"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/homeForecastRecycler"
-        app:layout_constraintBottom_toBottomOf="@id/homeForecastRecycler" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/homeForecastRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/PevisaotextView" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/homeFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_add" />
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/homeFab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:tint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:srcCompat="@drawable/ic_add" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/yahoo_logo"
-        android:id="@+id/imageView"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:src="@drawable/yahoo_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
 </layout>

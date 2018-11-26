@@ -55,6 +55,8 @@ class HomeActivity : AppCompatActivity(), WeatherServiceCallback {
                 R.color.light_blue,
                 R.color.colorAccent,
                 R.color.colorPrimary)
+
+        moreInfoIcon.setOnClickListener { goToMoreInfo() }
     }
 
     override fun onResume() {
@@ -157,7 +159,6 @@ class HomeActivity : AppCompatActivity(), WeatherServiceCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_more_info -> goToMoreInfo()
             R.id.action_favorites -> openFavorites()
             R.id.action_settings -> openSettings()
             else -> {
