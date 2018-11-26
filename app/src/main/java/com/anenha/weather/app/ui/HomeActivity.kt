@@ -122,6 +122,7 @@ class HomeActivity : AppCompatActivity(), WeatherServiceCallback {
         val intent = intent
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
+            gpsLocationImage.visibility = View.GONE
             refreshWeather(query)
         }
     }
@@ -149,6 +150,7 @@ class HomeActivity : AppCompatActivity(), WeatherServiceCallback {
                 val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
 
+                gpsLocationImage.visibility = View.GONE
                 refreshWeather(query)
                 return true
             }
