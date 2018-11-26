@@ -6,10 +6,10 @@
 
     <LinearLayout
         android:layout_margin="3dp"
-        android:paddingTop="0dp"
+        android:paddingTop="5dp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="10dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/background_forecast"
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@{model.day}"
+            android:layout_marginTop="5dp"
             android:textColor="@android:color/white"
             android:id="@+id/forecast_item_week_day" />
 
@@ -42,20 +43,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:padding="3dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:paddingEnd="5dp"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
                 android:src="@drawable/icon_temp_high"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@{model.high}"
+                android:layout_marginStart="5dp"
                 android:textColor="@android:color/white"
                 android:id="@+id/forecast_item_high"
                 android:textStyle="bold" />
@@ -68,15 +68,15 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:paddingEnd="5dp"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
                 android:src="@drawable/icon_temp_low"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@{model.low}"
+                android:layout_marginStart="5dp"
                 android:textColor="@android:color/white"
                 android:id="@+id/forecast_item_low"
                 android:textStyle="bold" />

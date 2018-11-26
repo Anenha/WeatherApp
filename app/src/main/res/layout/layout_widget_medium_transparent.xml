@@ -4,7 +4,6 @@
     android:id="@+id/widget_small_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="10dp"
     android:orientation="horizontal"
     android:background="@android:color/transparent"
     android:baselineAligned="false"
