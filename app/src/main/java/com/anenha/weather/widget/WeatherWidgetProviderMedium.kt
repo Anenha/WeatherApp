@@ -100,7 +100,7 @@ class WeatherWidgetProviderMedium : AppWidgetProvider(), WeatherServiceCallback 
 
     private fun setOnClickUpdate(appWidgetIds: IntArray) {
         // Register an onClickListener
-        val intent = Intent(context, WeatherWidgetProviderLarge::class.java)
+        val intent = Intent(context, WeatherWidgetProviderMedium::class.java)
 
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
