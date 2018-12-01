@@ -7,6 +7,8 @@
     <color name="light_blue">#5FA8FA</color>
     <color name="blue">#A50768D6</color>
     <color name="dark_blue">#012965</color>
+    <color name="green_blue">#409595</color>
+    <color name="dark_green_blue">#306060</color>
     
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

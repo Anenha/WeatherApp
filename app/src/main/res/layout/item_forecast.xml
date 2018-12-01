@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="model" type="com.anenha.weather.app.entity.ForecastEntity"/>
+        <variable name="model" type="com.anenha.weather.entity.ForecastEntity"/>
     </data>
 
     <LinearLayout

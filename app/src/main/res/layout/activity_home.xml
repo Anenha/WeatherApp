@@ -6,7 +6,7 @@
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.HomeActivity">
+    tools:context=".app.ui.activity.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_home" />
+    <fragment android:name="com.anenha.weather.ui.fragment.WeatherFragment"
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
 
     <include layout="@layout/layout_loading" />
 

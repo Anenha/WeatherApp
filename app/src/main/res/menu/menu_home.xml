@@ -1,25 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".app.ui.HomeActivity">
+    tools:context=".app.ui.activity.HomeActivity">
 
     <item
         android:id="@+id/action_search"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="@string/action_search"
         android:icon="@drawable/ic_search"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
         android:id="@+id/action_favorites"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         android:title="@string/title_activity_favorites"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="3"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 </menu>
