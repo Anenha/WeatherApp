@@ -10,6 +10,6 @@
     <gradient
         android:angle="225"
         android:endColor="@color/light_blue"
-        android:startColor="@color/alpha_white" />
+        android:startColor="@color/menuIcon" />
 
 </shape>

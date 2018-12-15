@@ -1,5 +1,6 @@
 package com.anenha.weather.utils
 
+import android.app.Activity
 import android.content.Context
 import android.os.IBinder
 import android.preference.PreferenceManager
@@ -57,7 +58,7 @@ object Prefs {
         editor.apply()
     }
 
-    fun addCityDialog(context: Context, windowToken: IBinder, callback: PrefsCallback) {
+    fun addCityDialog(context: Context, currentFocus: View?, callback: PrefsCallback) {
 
         val view = LayoutInflater.from(context)
                 .inflate(R.layout.layout_dialog_input, null, false)
@@ -70,7 +71,7 @@ object Prefs {
                 }
                 .setNegativeButton(context.getString(R.string.add_city_dialog_negative_button)) { _, _ ->
                     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(windowToken, 0)
+                    imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
                 }
                 .show()
     }

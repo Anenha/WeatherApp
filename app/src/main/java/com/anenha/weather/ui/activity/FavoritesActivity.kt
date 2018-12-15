@@ -84,7 +84,7 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     private fun addCity() {
-        Prefs.addCityDialog(this, currentFocus.windowToken, object : Prefs.PrefsCallback {
+        Prefs.addCityDialog(this, currentFocus, object : Prefs.PrefsCallback {
             override fun onAddCity(city: String) {
                 getWeather()
             }

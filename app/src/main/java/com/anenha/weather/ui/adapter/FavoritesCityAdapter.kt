@@ -13,6 +13,7 @@ import com.anenha.weather.ui.activity.HomeActivity
 
 import java.util.ArrayList
 import com.anenha.weather.entity.TodayEntity
+import com.anenha.weather.utils.AppConst
 import kotlinx.android.synthetic.main.item_favorite.view.*
 
 /**
@@ -50,7 +51,7 @@ class FavoritesCityAdapter(private val context: Context, private val fe: Favorit
                 holder.itemView.favoriteCheckBox.isChecked = !holder.itemView.favoriteCheckBox.isChecked
             } else {
                 val i = Intent(context, HomeActivity::class.java)
-                i.putExtra("REFRESH_CITY", city)
+                i.putExtra(AppConst.CITY_TO_REFRESH, city)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 context.startActivity(i)
             }

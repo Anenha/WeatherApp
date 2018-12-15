@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.FragmentTransaction
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AlertDialog
 import com.anenha.weather.R
 import com.anenha.weather.ui.activity.FavoritesActivity
@@ -13,12 +15,14 @@ import com.anenha.weather.ui.fragment.WeatherFragment
 
 class Router {
     companion object {
-        fun goToCityWeather(activity: Activity){
-            val fragmentTransaction: FragmentTransaction = activity.fragmentManager.beginTransaction()
-            val fragment = WeatherFragment()
-            fragmentTransaction.add(R.id.fragment_container, fragment)
-            fragmentTransaction.addToBackStack(fragment.tag)
-            fragmentTransaction.commit()
+        fun goToCityWeather(supportFragmentManager: FragmentManager, city: String?){
+            val fragment = WeatherFragment.newInstance(city)
+
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .addToBackStack(fragment.tag + city)
+                    .commit()
         }
 
         fun goToMoreInfo(context: Context, city: String) {

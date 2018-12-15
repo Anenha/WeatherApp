@@ -9,6 +9,7 @@
     tools:context=".app.ui.activity.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/homeAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -22,9 +23,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <fragment android:name="com.anenha.weather.ui.fragment.WeatherFragment"
+    <fragment
         android:id="@+id/fragment_container"
-        android:layout_width="0dp"
+        class="com.anenha.weather.ui.fragment.WeatherFragment"
+        android:layout_marginTop="57dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <include layout="@layout/layout_loading" />
